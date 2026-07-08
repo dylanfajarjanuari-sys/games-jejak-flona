@@ -1,0 +1,1046 @@
+index.html.
+<!doctype html>
+<html lang="id"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260708-05-579f504"}');</script><script src="/_sdk/f432b76fb310b513.telemetry_sdk.js" integrity="sha512-9FJQ55EKmmqhyyik8BhrMVfm0+iYYfb8uOlRsjtkxJMEI97qOVEI4PnHohDjQAtvAep0IOEpdQ64eki0sz62ug=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family 100 Jejak Flona</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Baloo+2:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+  :root{
+    --forest-1:#3f6d2c; --forest-2:#6ba43a; --forest-3:#a7c957;
+    --wood-dark:#6b4423; --wood:#8a5a2b; --wood-light:#b07a44; --cream:#f5ecd7;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; width:100%; min-height:100vh; min-height:calc(100 * min(var(--vh, 1vh), 1vh)); }
+  body{ font-family:'Fredoka', sans-serif; width:100%; overflow-x:hidden; display:flex; flex-direction:column; justify-content:space-between; }
+  
+  /* Modern Responsive Scaled Fullscreen Layout */
+  :fullscreen main, :-webkit-full-screen main {
+    max-width: 98% !important;
+    width: 98% !important;
+    padding: 1rem !important;
+    height: 96vh !important;
+    height: calc(96 * min(var(--vh, 1vh), 1vh)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    gap: 0.5rem !important;
+  }
+  :fullscreen .grid-cols-1, :-webkit-full-screen .grid-cols-1 {
+    grid-template-columns: 260px 1fr 260px !important;
+    flex: 1 !important;
+    align-items: stretch !important;
+    gap: 1.5rem !important;
+  }
+  :fullscreen #answer-grid, :-webkit-full-screen #answer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+    flex: 1 !important;
+  }
+  :fullscreen .flip, :-webkit-full-screen .flip {
+    height: 125px !important; /* Larger interactive flip cards during fullscreen */
+  }
+  :fullscreen #question-board, :-webkit-full-screen #question-board {
+    padding: 2rem !important;
+  }
+  :fullscreen #question-text, :-webkit-full-screen #question-text {
+    font-size: 2.75rem !important;
+  }
+  :fullscreen .answer-text, :-webkit-full-screen .answer-text {
+    font-size: 1.75rem !important;
+  }
+  :fullscreen .answer-pts, :-webkit-full-screen .answer-pts {
+    font-size: 2rem !important;
+  }
+  :fullscreen .answer-num, :-webkit-full-screen .answer-num {
+    font-size: 3.5rem !important;
+  }
+  :fullscreen #team-a-score, :fullscreen #team-b-score,
+  :-webkit-full-screen #team-a-score, :-webkit-full-screen #team-b-score {
+    font-size: 6rem !important;
+  }
+  :fullscreen #teamAPanel, :fullscreen #teamBPanel,
+  :-webkit-full-screen #teamAPanel, :-webkit-full-screen #teamBPanel {
+    padding: 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+  :fullscreen #answer-form, :-webkit-full-screen #answer-form {
+    padding: 1.25rem !important;
+  }
+  :fullscreen #answer-input, :-webkit-full-screen #answer-input {
+    font-size: 1.5rem !important;
+    padding: 1rem 1.5rem !important;
+  }
+  :fullscreen #answer-form button, :-webkit-full-screen #answer-form button {
+    font-size: 1.5rem !important;
+    padding: 1rem 2rem !important;
+  }
+
+  body:fullscreen, body:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+    height: calc(100 * min(var(--vh, 1vh), 1vh));
+    overflow-y: auto;
+    background: var(--forest-1);
+    justify-content: flex-start !important;
+    padding: 0 !important;
+  }
+  .heading-font{ font-family:'Baloo 2', 'Fredoka', sans-serif; }
+
+  /* Sunlight sweep */
+  .sunlight {
+    position: absolute; inset: -20% -20% auto -20%; height: 140%;
+    background: radial-gradient(circle at 20% 15%, rgba(255, 251, 210, 0.65), rgba(255, 247, 196, 0.15) 30%, rgba(255, 247, 196, 0) 60%);
+    mix-blend-mode: screen; pointer-events: none;
+    animation: sunmove 20s ease-in-out infinite alternate;
+    z-index: 2;
+  }
+  @keyframes sunmove{ from{ transform: translateX(-5%) rotate(-2deg); } to{ transform: translateX(5%) rotate(2deg); } }
+
+  /* Moving clouds */
+  .cloud {
+    position: absolute;
+    opacity: 0.45;
+    pointer-events: none;
+    animation: floatCloud linear infinite;
+    z-index: 1;
+  }
+  @keyframes floatCloud {
+    from { transform: translateX(-150px); }
+    to { transform: translateX(calc(100vw + 150px)); }
+  }
+
+  /* Birds flying */
+  .bird {
+    position: absolute;
+    pointer-events: none;
+    animation: flyBird linear infinite;
+    z-index: 2;
+  }
+  @keyframes flyBird {
+    0% { transform: translate(-50px, 10vh) scale(0.6) rotate(5deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translate(calc(100vw + 50px), 0vh) scale(0.9) rotate(-5deg); opacity: 0; }
+  }
+
+  /* Butterflies flying */
+  .butterfly {
+    position: absolute;
+    pointer-events: none;
+    animation: flutter 12s ease-in-out infinite;
+    z-index: 3;
+    font-size: 1.5rem;
+  }
+  @keyframes flutter {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(60px, -40px) rotate(15deg); }
+    50% { transform: translate(120px, 0px) rotate(-10deg); }
+    75% { transform: translate(60px, 40px) rotate(20deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+  /* Wind sway for flora */
+  .wind-sway {
+    animation: windSway 6s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+  }
+  @keyframes windSway {
+    0% { transform: rotate(-2deg) skewX(-1deg); }
+    100% { transform: rotate(3deg) skewX(2deg); }
+  }
+
+  /* Deep Fog Layer */
+  .forest-fog {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 160px;
+    background: linear-gradient(to top, rgba(245, 236, 215, 0.35), rgba(107, 164, 58, 0.15) 50%, rgba(107, 164, 58, 0));
+    pointer-events: none;
+    z-index: 3;
+    mix-blend-mode: overlay;
+    animation: fogPulse 8s ease-in-out infinite alternate;
+  }
+  @keyframes fogPulse {
+    0% { opacity: 0.4; transform: translateY(5px); }
+    100% { opacity: 0.8; transform: translateY(-5px); }
+  }
+
+  /* Central Glow Effect behind Board */
+  .center-glow {
+    position: absolute;
+    top: 45%; left: 50%; transform: translate(-50%, -50%);
+    width: 70%; height: 60%;
+    background: radial-gradient(circle, rgba(107, 164, 58, 0.25) 0%, rgba(107, 164, 58, 0) 70%);
+    pointer-events: none;
+    z-index: 4;
+    mix-blend-mode: screen;
+  }
+
+  /* Vignette Effect */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 50%, rgba(12, 35, 10, 0.4) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Parallax Layers with subtle blur */
+  .forest-layer-sky {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #57b3f2 0%, #aee0fc 45%, #e1f5fe 100%);
+    z-index: 0;
+    filter: blur(1px);
+  }
+
+  .forest-layer-back {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 75%;
+    background-image: radial-gradient(circle at 50% 100%, #4a8235 20%, #355e25 80%);
+    clip-path: polygon(0% 100%, 0% 75%, 8% 68%, 15% 73%, 24% 65%, 32% 70%, 41% 60%, 50% 68%, 59% 58%, 68% 66%, 77% 62%, 84% 71%, 92% 65%, 100% 74%, 100% 100%);
+    opacity: 0.65;
+    z-index: 1;
+    transform: translateY(20px);
+    filter: blur(2px);
+  }
+
+  .forest-layer-mid {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 60%;
+    background-image: radial-gradient(circle at 30% 100%, #5d9642 30%, #3c6b24 100%);
+    clip-path: polygon(0% 100%, 0% 80%, 10% 74%, 22% 82%, 35% 71%, 48% 79%, 60% 73%, 72% 81%, 85% 72%, 100% 83%, 100% 100%);
+    opacity: 0.85;
+    z-index: 2;
+    transform: translateY(10px);
+    filter: blur(1.5px);
+  }
+
+  /* Wood texture */
+  .wood-panel{
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.06) 0 2px, rgba(255,255,255,.03) 2px 6px),
+      var(--wood);
+    border:5px solid var(--wood-dark);
+    box-shadow:0 12px 26px rgba(0,0,0,.28), inset 0 2px 6px rgba(255,255,255,.15);
+  }
+
+  .soft-shadow{ box-shadow:0 10px 24px rgba(0,0,0,.22); }
+
+  /* Flip cards */
+  .flip{ perspective:900px; }
+  .flip-inner{ position:relative; width:100%; height:100%; transition:transform .6s cubic-bezier(.34,1.3,.5,1); transform-style:preserve-3d; }
+  .flip.open .flip-inner{ transform:rotateY(180deg); }
+  .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .flip-back{ transform:rotateY(180deg); flex-direction:column; gap:2px; padding:.5rem; text-align:center; }
+
+  /* Score zoom */
+  .score-pop{ animation:pop .5s ease; }
+  @keyframes pop{ 0%{ transform:scale(1);} 40%{ transform:scale(1.35);} 100%{ transform:scale(1);} }
+
+  /* Shake */
+  .shake{ animation:shake .5s; }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 20%{transform:translateX(-10px);} 40%{transform:translateX(10px);} 60%{transform:translateX(-7px);} 80%{transform:translateX(7px);} }
+
+  /* Strike footprint lit */
+  .strike-icon{ transition:all .3s; opacity:0.35; filter:grayscale(1); }
+  .strike-icon.lit{ opacity:1; filter:none; color:#e63946 !important; animation:pop 0.35s ease; }
+
+  /* Red flash effect */
+  .red-flash {
+    animation: flashRed 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+  @keyframes flashRed {
+    0% { background-color: rgba(230, 57, 70, 0.7); filter: saturate(1.5) contrast(1.2); }
+    15% { background-color: rgba(230, 57, 70, 0.4); }
+    30% { background-color: rgba(230, 57, 70, 0.6); }
+    100% { background-color: transparent; }
+  }
+
+  /* Screen dim overlay for correct answer */
+  .correct-dim {
+    animation: dimScreen 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+  @keyframes dimScreen {
+    0%, 90% { background-color: rgba(0, 0, 0, 0.35); }
+    100% { background-color: transparent; }
+  }
+
+  /* Red alert pulse for panels during incorrect answer */
+  .red-alert-pulse {
+    animation: alertPulse 1.2s ease-in-out;
+  }
+  @keyframes alertPulse {
+    0%, 100% { border-color: transparent; box-shadow: 0 10px 24px rgba(0,0,0,0.22); }
+    25%, 75% { border-color: #e63946 !important; background-color: rgba(230, 57, 70, 0.2) !important; box-shadow: 0 0 30px rgba(230, 57, 70, 0.8); }
+    50% { border-color: #ff4d5a !important; background-color: rgba(230, 57, 70, 0.35) !important; box-shadow: 0 0 45px rgba(230, 57, 70, 1); }
+  }
+
+  /* Screen crack effect overlay */
+  .crack-overlay {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(35deg, transparent 48%, rgba(255,255,255,0.4) 49%, rgba(255,255,255,0.7) 50%, transparent 51%),
+      linear-gradient(-45deg, transparent 45%, rgba(255,255,255,0.4) 46%, rgba(255,255,255,0.7) 48%, transparent 50%);
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0;
+    mix-blend-mode: overlay;
+    animation: crackAppear 1.2s ease-out;
+  }
+  @keyframes crackAppear {
+    0% { opacity: 1; transform: scale(1); }
+    90% { opacity: 0.8; transform: scale(1.02); }
+    100% { opacity: 0; transform: scale(1.05); }
+  }
+
+  /* Pop feedback overlay */
+  .pop-graphic {
+    animation: popInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes popInScale {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Shine effect on text and board */
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -60%; width: 30%; height: 200%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(30deg);
+    animation: shineSweep 2s infinite ease-in-out;
+  }
+  @keyframes shineSweep {
+    0% { left: -60%; }
+    30% { left: 140%; }
+    100% { left: 140%; }
+  }
+
+  /* Behind Glow Sunburst */
+  .sunburst-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(167, 201, 87, 0.9) 0%, rgba(107, 164, 58, 0.5) 40%, rgba(107, 164, 58, 0) 70%);
+    animation: pulseGlow 1.5s infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @keyframes pulseGlow {
+    from { transform: scale(0.8) rotate(0deg); opacity: 0.8; }
+    to { transform: scale(1.4) rotate(180deg); opacity: 1; }
+  }
+
+  /* Super Mario / Fall Guys styled celebratory pop */
+  .mario-victory-enter {
+    animation: marioPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards, greenGlowPulse 1.5s infinite alternate;
+  }
+  @keyframes marioPop {
+    0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+    70% { transform: scale(1.15) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes greenGlowPulse {
+    from { box-shadow: 0 0 30px rgba(107, 164, 58, 0.6), 0 20px 50px rgba(0,0,0,0.4); }
+    to { box-shadow: 0 0 60px rgba(167, 201, 87, 1), 0 20px 50px rgba(0,0,0,0.5); }
+  }
+
+  /* Huge full screen celebration banner */
+  .banner-stripe {
+    position: absolute;
+    left: -10%; right: -10%; height: 140px;
+    background: linear-gradient(90deg, transparent, rgba(167, 201, 87, 0.9) 20%, rgba(255, 255, 255, 0.95) 50%, rgba(167, 201, 87, 0.9) 80%, transparent);
+    transform: skewY(-4deg);
+    z-index: -1;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    animation: bannerSlide 0.5s ease-out forwards;
+  }
+  @keyframes bannerSlide {
+    0% { transform: scaleX(0) skewY(-4deg); }
+    100% { transform: scaleX(1) skewY(-4deg); }
+  }
+
+  /* Star rotate */
+  .spin-slow {
+    animation: spinSlow 6s linear infinite;
+  }
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Particle animation */
+  .sparkle-particle {
+    position: absolute;
+    pointer-events: none;
+    animation: sparkleFly 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    z-index: 50;
+  }
+  @keyframes sparkleFly {
+    0% { transform: translate(0, 0) scale(1.8) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 12px currentColor); }
+    100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(540deg); opacity: 0; }
+  }
+
+  /* Dust / debris animation */
+  .dust-particle {
+    position: absolute;
+    pointer-events: none;
+    animation: dustFly 1.4s cubic-bezier(0.15, 0.85, 0.4, 1) forwards;
+    z-index: 50;
+  }
+  @keyframes dustFly {
+    0% { transform: translate(0, 0) scale(1.5) rotate(0deg); opacity: 0.9; }
+    100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(360deg); opacity: 0; }
+  }
+
+  /* Success halo */
+  .success-halo {
+    box-shadow: 0 0 30px rgba(167, 201, 87, 1);
+    border: 4px solid #a7c957 !important;
+    animation: successPulse 1s infinite alternate;
+  }
+  @keyframes successPulse {
+    from { box-shadow: 0 0 15px rgba(167, 201, 87, 0.6); }
+    to { box-shadow: 0 0 35px rgba(167, 201, 87, 1); }
+  }
+
+  /* Active strike pulse */
+  .strike-pulse {
+    animation: strikeZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.5) infinite alternate;
+  }
+  @keyframes strikeZoom {
+    0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(230,57,70,0.5)); }
+    100% { transform: scale(1.4); filter: drop-shadow(0 0 12px #e63946); }
+  }
+
+  /* Score floating popup */
+  .floating-pts {
+    animation: floatUp 1.2s ease-out forwards;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-40px) scale(1.2); opacity: 0; }
+  }
+
+  /* Active team ring */
+  .team-active{ outline:5px solid #ffd166; outline-offset:2px; }
+
+  /* Dark mode */
+  body.dark .dark-dim{ filter:brightness(.72) saturate(1.05); }
+  body.dark .wood-panel{ filter:brightness(.82); }
+
+  /* Overlay */
+  .overlay{ transition:opacity .4s ease; }
+  .hidden-soft{ opacity:0; pointer-events:none; }
+
+  .btn{ transition:transform .15s ease, filter .15s ease; }
+  .btn:hover{ transform:translateY(-2px); filter:brightness(1.06); }
+  .btn:active{ transform:translateY(0); }
+  .btn:focus-visible{ outline:3px solid #ffd166; outline-offset:2px; }
+  input:focus-visible{ outline:3px solid #ffd166; }
+</style>
+  <script src="/_sdk/0179d719c431a79e.data_sdk.js" type="text/javascript" integrity="sha512-OsRvJkI5GkC3MJQcgotQYotpzrMSX415GiKKgvYdxQEEkzD/fdchShO2FMSy0PJr/tiINMXOk5Vl2zAgg6bUiA=="></script>
+  <script src="/_sdk/9432170dbd2ae0df.resizing_sdk.js" type="text/javascript" integrity="sha512-FeT+58sb1f9ejWPWFjCbJvTT+SDwGV+ngrHUnlO7TWEOoqwOLj6p256kO3vOL7DIWl1cIgrobiof8v2bOigwPg=="></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen w-full relative flex flex-col justify-between" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh)); background: rgb(63, 32, 14);"><!-- Multi-layered parallax forest scenic background -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none select-none"><!-- Sky & Mountains layer -->
+   <div class="forest-layer-sky"></div><!-- Clouds floating -->
+   <div class="cloud text-7xl" style="top: 8%; animation-duration: 90s; animation-delay: -10s;">
+    ☁️
+   </div>
+   <div class="cloud text-8xl" style="top: 15%; animation-duration: 120s; animation-delay: -45s;">
+    ☁️
+   </div>
+   <div class="cloud text-6xl" style="top: 4%; animation-duration: 140s; animation-delay: -20s;">
+    ☁️
+   </div><!-- Distant Forest Ridge -->
+   <div class="forest-layer-back"></div><!-- Midground Trees & Forest -->
+   <div class="forest-layer-mid"></div><!-- Sunlight shafts -->
+   <div class="sunlight"></div><!-- Light spotlight glow behind boards -->
+   <div class="center-glow"></div><!-- Vignette effect for focus -->
+   <div class="vignette"></div><!-- Morning Fog Layer -->
+   <div class="forest-fog"></div>
+  </div><!-- Decorative elements overlay layer (Simplified/Empty for professional layout focus) -->
+  <div class="pointer-events-none select-none z-20"></div>
+  <main class="relative z-10 w-full max-w-[1400px] mx-auto px-3 sm:px-6 py-5"><!-- Header -->
+   <header class="flex flex-col items-center gap-2 mb-4">
+    <div class="wood-panel rounded-2xl px-6 py-3 text-center">
+     <h1 data-template-id="game-title" class="canva-text heading-font leading-none" style="color: rgb(255, 247, 214); font-weight: 800; font-style: normal; font-size: 40px;">Temukan jawabannya </h1>
+     <p data-template-id="game-subtitle" class="canva-text mt-1" style="color: rgb(240, 228, 192); font-weight: 400; font-style: normal; font-size: 16px;">Petualangan Alam Bersama Dua Tim!</p>
+    </div>
+    <div class="flex flex-wrap gap-2 justify-center"><button data-template-id="theme-toggle-button" onclick="toggleTheme()" class="canva-button btn rounded-xl px-3 py-2 soft-shadow flex items-center gap-2" style="background: rgb(138, 90, 43); color: rgb(255, 247, 214); font-weight: 600;"><i data-lucide="moon" style="width:18px;height:18px"></i><span id="theme-label-txt"></span></button> <button data-template-id="timer-toggle-button" onclick="toggleTimer()" class="canva-button btn rounded-xl px-3 py-2 soft-shadow flex items-center gap-2" style="background: rgb(138, 90, 43); color: rgb(255, 247, 214); font-weight: 600;"><i data-lucide="timer" style="width:18px;height:18px"></i><span id="timer-btn-txt"></span></button> <button data-template-id="fullscreen-button" onclick="toggleFullscreen()" class="canva-button btn rounded-xl px-3 py-2 soft-shadow flex items-center gap-2" style="background: rgb(138, 90, 43); color: rgb(255, 247, 214); font-weight: 600;"><i data-lucide="maximize" style="width:18px;height:18px"></i></button>
+    </div>
+   </header><!-- Main layout -->
+   <div class="grid grid-cols-1 lg:grid-cols-[220px_1fr_220px] gap-4 items-start"><!-- Team A -->
+    <section data-template-id="team-a-panel" class="canva-panel rounded-2xl p-4 soft-shadow order-2 lg:order-1" id="teamAPanel" style="background: linear-gradient(160deg, rgb(107, 164, 58), rgb(79, 125, 47));">
+     <h2 data-template-id="team-a-name" class="canva-text heading-font text-center" style="color: rgb(255, 247, 214); font-weight: 700; font-style: normal; font-size: 24px;">Gajah dan suep</h2>
+     <div class="text-center my-2"><span id="team-a-score" class="heading-font text-5xl font-extrabold text-white drop-shadow">0</span>
+     </div><button data-template-id="team-a-select-button" onclick="setActiveTeam('A')" class="canva-button btn w-full rounded-xl py-2 soft-shadow" style="background: rgb(176, 122, 68); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Pilih Tim A</button>
+    </section><!-- Center -->
+    <section class="order-1 lg:order-2 flex flex-col gap-4"><!-- Question board (Enlarged by ~15% padding/text, shifted slightly closer) -->
+     <div data-template-id="question-board" class="canva-panel wood-panel rounded-2xl p-6 text-center" style="background: rgb(138, 90, 43);">
+      <div class="flex items-center justify-center gap-2 mb-1"><span data-template-id="round-label" class="canva-text heading-font text-lg" style="color: rgb(245, 236, 215); font-weight: 700; font-style: normal; font-size: 22px;">Ronde</span> <span id="round-number" class="heading-font text-[color:var(--cream)] text-lg">1</span>
+      </div>
+      <p id="question-text" class="heading-font text-2xl sm:text-4xl text-[color:var(--cream)] leading-snug"></p>
+      <div class="mt-3 flex items-center justify-center gap-3">
+       <div class="flex items-center gap-1"><i data-lucide="footprints" class="strike-icon" id="strike-1" style="width:26px;height:26px"></i> <i data-lucide="footprints" class="strike-icon" id="strike-2" style="width:26px;height:26px"></i> <i data-lucide="footprints" class="strike-icon" id="strike-3" style="width:26px;height:26px"></i>
+       </div><span id="timer-wrap" class="hidden items-center gap-1 wood-panel rounded-lg px-2 py-1" style="border-width:3px"> <span data-template-id="timer-label" class="canva-text" style="color: rgb(245, 236, 215); font-weight: 600; font-style: normal; font-size: 14px;">Waktu</span> <span id="timer-display" class="heading-font text-[color:var(--cream)] font-bold">60</span> </span>
+      </div>
+     </div><!-- Answer grid -->
+     <div id="answer-grid" class="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-2 mb-3"><!-- 6 bound answer cards -->
+      <div class="flip" style="height:85px">
+       <div class="flip-inner">
+        <div data-template-id="answer-1" class="canva-card flip-face soft-shadow" style="background: linear-gradient(160deg, rgb(176, 122, 68), rgb(138, 90, 43)); color: rgb(255, 247, 214);">
+         <span class="heading-font text-3xl font-extrabold answer-num">1</span>
+        </div>
+        <div class="flip-face flip-back" data-template-id="answer-1-back" style="background: rgb(245, 236, 215); color: rgb(74, 49, 19);">
+         <span class="answer-text heading-font text-lg font-bold leading-tight"></span><span class="answer-pts heading-font text-xl font-extrabold"></span>
+        </div>
+       </div>
+      </div>
+      <div class="flip" style="height:85px">
+       <div class="flip-inner">
+        <div data-template-id="answer-2" class="canva-card flip-face soft-shadow" style="background: linear-gradient(160deg, rgb(176, 122, 68), rgb(138, 90, 43)); color: rgb(255, 247, 214);">
+         <span class="heading-font text-3xl font-extrabold answer-num">2</span>
+        </div>
+        <div class="flip-face flip-back" data-template-id="answer-2-back" style="background: rgb(245, 236, 215); color: rgb(74, 49, 19);">
+         <span class="answer-text heading-font text-lg font-bold leading-tight"></span><span class="answer-pts heading-font text-xl font-extrabold"></span>
+        </div>
+       </div>
+      </div>
+      <div class="flip" style="height:85px">
+       <div class="flip-inner">
+        <div data-template-id="answer-3" class="canva-card flip-face soft-shadow" style="background: linear-gradient(160deg, rgb(176, 122, 68), rgb(138, 90, 43)); color: rgb(255, 247, 214);">
+         <span class="heading-font text-3xl font-extrabold answer-num">3</span>
+        </div>
+        <div class="flip-face flip-back" data-template-id="answer-3-back" style="background: rgb(245, 236, 215); color: rgb(74, 49, 19);">
+         <span class="answer-text heading-font text-lg font-bold leading-tight"></span><span class="answer-pts heading-font text-xl font-extrabold"></span>
+        </div>
+       </div>
+      </div>
+      <div class="flip" style="height:85px">
+       <div class="flip-inner">
+        <div data-template-id="answer-4" class="canva-card flip-face soft-shadow" style="background: linear-gradient(160deg, rgb(176, 122, 68), rgb(138, 90, 43)); color: rgb(255, 247, 214);">
+         <span class="heading-font text-3xl font-extrabold answer-num">4</span>
+        </div>
+        <div class="flip-face flip-back" data-template-id="answer-4-back" style="background: rgb(245, 236, 215); color: rgb(74, 49, 19);">
+         <span class="answer-text heading-font text-lg font-bold leading-tight"></span><span class="answer-pts heading-font text-xl font-extrabold"></span>
+        </div>
+       </div>
+      </div>
+      <div class="flip" style="height:85px">
+       <div class="flip-inner">
+        <div data-template-id="answer-5" class="canva-card flip-face soft-shadow" style="background: linear-gradient(160deg, rgb(176, 122, 68), rgb(138, 90, 43)); color: rgb(255, 247, 214);">
+         <span class="heading-font text-3xl font-extrabold answer-num">5</span>
+        </div>
+        <div class="flip-face flip-back" data-template-id="answer-5-back" style="background: rgb(245, 236, 215); color: rgb(74, 49, 19);">
+         <span class="answer-text heading-font text-lg font-bold leading-tight"></span><span class="answer-pts heading-font text-xl font-extrabold"></span>
+        </div>
+       </div>
+      </div>
+      <div class="flip" style="height:85px">
+       <div class="flip-inner">
+        <div data-template-id="answer-6" class="canva-card flip-face soft-shadow" style="background: linear-gradient(160deg, rgb(176, 122, 68), rgb(138, 90, 43)); color: rgb(255, 247, 214);">
+         <span class="heading-font text-3xl font-extrabold answer-num">6</span>
+        </div>
+        <div class="flip-face flip-back" data-template-id="answer-6-back" style="background: rgb(245, 236, 215); color: rgb(74, 49, 19);">
+         <span class="answer-text heading-font text-lg font-bold leading-tight"></span><span class="answer-pts heading-font text-xl font-extrabold"></span>
+        </div>
+       </div>
+      </div>
+     </div><!-- Message -->
+     <p id="message" class="heading-font text-center text-lg min-h-[26px] text-[color:var(--cream)]"></p><!-- Input row -->
+     <form id="answer-form" class="wood-panel rounded-2xl p-3 flex flex-col sm:flex-row gap-2 items-stretch"><label for="answer-input" class="sr-only">Jawaban</label> <input id="answer-input" data-template-id="answer-input" type="text" autocomplete="off" class="canva-input flex-1 rounded-xl px-4 py-3 heading-font text-lg text-[#4a3113] bg-[color:var(--cream)] border-0" placeholder="Ketik jawaban di sini..." style="color: rgb(74, 49, 19); font-weight: 400; font-style: normal; font-size: 18px;"> <button type="submit" data-template-id="check-button" class="canva-button btn rounded-xl px-6 py-3 soft-shadow heading-font" style="background: rgb(233, 161, 59); color: rgb(74, 49, 19); font-weight: 700; font-style: normal; font-size: 18px;">Cek</button>
+     </form><!-- Controls -->
+     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2"><button data-template-id="reveal-all-button" onclick="revealAll()" class="canva-button btn rounded-xl py-2 soft-shadow text-sm" style="background: rgb(107, 164, 58); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Buka Semua</button> <button data-template-id="strike-button" onclick="addStrike()" class="canva-button btn rounded-xl py-2 soft-shadow text-sm" style="background: rgb(193, 68, 14); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Strike</button> <button data-template-id="undo-strike-button" onclick="undoStrike()" class="canva-button btn rounded-xl py-2 soft-shadow text-sm" style="background: rgb(138, 90, 43); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Undo Strike</button> <button data-template-id="next-round-button" onclick="nextRound()" class="canva-button btn rounded-xl py-2 soft-shadow text-sm" style="background: rgb(79, 125, 47); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Ronde Berikutnya</button> <button data-template-id="reset-button" onclick="resetGame()" class="canva-button btn rounded-xl py-2 soft-shadow text-sm" style="background: rgb(107, 68, 35); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Reset Game</button> <button data-template-id="mute-button" onclick="toggleMute()" class="canva-button btn rounded-xl py-2 soft-shadow text-sm" style="background: rgb(138, 90, 43); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Suara On/Off</button>
+     </div>
+    </section><!-- Team B -->
+    <section data-template-id="team-b-panel" class="canva-panel rounded-2xl p-4 soft-shadow order-3" id="teamBPanel" style="background: linear-gradient(160deg, rgb(167, 201, 87), rgb(123, 168, 63));">
+     <h2 data-template-id="team-b-name" class="canva-text heading-font text-center" style="color: rgb(58, 77, 22); font-weight: 700; font-style: normal; font-size: 24px;">Strawberry dan udin petot</h2>
+     <div class="text-center my-2"><span id="team-b-score" class="heading-font text-5xl font-extrabold text-white drop-shadow">0</span>
+     </div><button data-template-id="team-b-select-button" onclick="setActiveTeam('B')" class="canva-button btn w-full rounded-xl py-2 soft-shadow" style="background: rgb(176, 122, 68); color: rgb(255, 247, 214); font-weight: 600; font-style: normal; font-size: 18px;">Pilih Tim B</button>
+    </section>
+   </div>
+  </main><!-- Case complete overlay --> <!-- Pop Visual Feedback Graphics -->
+  <div id="visual-feedback" class="pointer-events-none fixed inset-0 z-40 flex items-center justify-center transition-all duration-300 opacity-0 scale-95">
+   <!-- Will be populated dynamically by JS -->
+  </div>
+  <div id="overlay" class="overlay hidden-soft fixed inset-0 z-30 flex items-center justify-center bg-black/50 px-4">
+   <div data-template-id="case-complete-panel" class="canva-panel wood-panel rounded-3xl p-8 text-center max-w-md w-full" style="background: rgb(138, 90, 43);">
+    <div class="text-5xl mb-2">
+     🌿🎉🍃
+    </div>
+    <h2 data-template-id="case-complete-title" class="canva-text heading-font" style="color: rgb(255, 247, 214); font-weight: 800; font-style: normal; font-size: 34px;">Kasus Selesai!</h2>
+    <p data-template-id="case-complete-subtitle" class="canva-text mt-2" style="color: rgb(240, 228, 192); font-weight: 400; font-style: normal; font-size: 16px;">Semua jawaban sudah terbuka. Hebat, para penjelajah hutan!</p><button data-template-id="case-complete-close-button" onclick="closeOverlay()" class="canva-button btn mt-4 rounded-xl px-6 py-2 soft-shadow" style="background: rgb(233, 161, 59); color: rgb(74, 49, 19); font-weight: 700; font-style: normal; font-size: 18px;">Tutup</button>
+   </div>
+  </div>
+  <script src="/_sdk/719055fef2a85d14.editing_sdk.js" integrity="sha512-kFqrdGgIiTOsu307feB5Cy3JVP9IayftsmCIZ0csxYBGuBmJQPhyvcnmKR8F0fTW97h5s1gAvz3SumI8zJ6OxQ=="></script>
+  <script>
+  // ---- Round data ----
+  const ROUNDS = [
+    { q: "Sebutkan petunjuk yang muncul di kasus Naya", answers:[
+      {t:"Bebek",p:35},{t:"Berlendir",p:30},{t:"Sawah",p:25},{t:"Mual",p:20},
+      {t:"Gatal",p:18},{t:"Tangan Merah",p:15} ]},
+    { q: "Sebutkan hewan yang hidup di hutan.", answers:[
+      {t:"Harimau",p:35},{t:"Monyet",p:30},{t:"Gajah",p:25},{t:"Rusa",p:20},
+      {t:"Ular",p:15},{t:"Burung",p:10} ]},
+    { q: "Sebutkan buah yang berwarna kuning.", answers:[
+      {t:"Pisang",p:38},{t:"Mangga",p:24},{t:"Nanas",p:14},{t:"Lemon",p:10},
+      {t:"Jeruk",p:7},{t:"Belimbing",p:4} ]},
+    { q: "Sebutkan yang ada di dalam hutan.", answers:[
+      {t:"Pohon",p:30},{t:"Sungai",p:22},{t:"Batu",p:16},{t:"Daun",p:12},
+      {t:"Bunga",p:9},{t:"Rumput",p:6} ]},
+  ];
+
+  let roundIndex = 0;
+  let opened = [];        // booleans per answer slot
+  let strikes = 0;
+  let activeTeam = 'A';
+  let scoreA = 0, scoreB = 0;
+  let timerOn = false, timerRunning = false, timerVal = 60, timerId = null;
+  let muted = false;
+
+  const $ = s => document.querySelector(s);
+  const grid = () => [...document.querySelectorAll('#answer-grid .flip')];
+
+  // ---- Audio (Web Audio API) ----
+  let actx = null;
+  function ac(){ if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)(); return actx; }
+  function tone(freq, dur, type='sine', when=0, gain=0.18){
+    if(muted) return;
+    const c = ac(); const o = c.createOscillator(); const g = c.createGain();
+    o.type=type; o.frequency.value=freq; o.connect(g); g.connect(c.destination);
+    const t = c.currentTime + when;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, t+dur);
+    o.start(t); o.stop(t+dur+0.02);
+  }const correctSound = new Audio("correct-answer.mp3");
+const wrongSound = new Audio("Quiz Wrong Answer.mp3");
+  function soundCorrect(){
+    if (muted) return;
+
+    correctSound.pause();
+    correctSound.currentTime = 0;
+    correctSound.play();
+    // Merrier success TV Game Show ding, applause emulation, and brass fanfare
+    const now = 0;
+    // Bright High-pitch "DING!" Chime (Two-tone)
+    tone(880, 0.25, 'triangle', now, 0.35);      // A5
+    tone(1320, 0.35, 'sine', now + 0.08, 0.3);   // E6
+    
+    // Quick Fanfare Major Chord Arpeggio (Warm Triangle & Sine Brass)
+    tone(523.25, 0.4, 'triangle', now + 0.15, 0.25); // C5
+    tone(659.25, 0.4, 'triangle', now + 0.22, 0.25); // E5
+    tone(783.99, 0.4, 'triangle', now + 0.29, 0.25); // G5
+    tone(1046.50, 0.6, 'sine', now + 0.36, 0.35);    // C6
+    
+    // Emulated Crowd Applause / Clapping (white noise bursts using high-pass filters/quick pulses)
+    for (let i = 0; i < 18; i++) {
+      const start = now + 0.2 + (Math.random() * 1.5);
+      const freq = 2000 + (Math.random() * 1500);
+      const dur = 0.08 + (Math.random() * 0.08);
+      tone(freq, dur, 'triangle', start, 0.05);
+    }
+  }
+  function soundWrong() {
+    if (muted) return;
+
+    wrongSound.pause();
+    wrongSound.currentTime = 0;
+    wrongSound.play();
+    // Loud, dramatic TV game show buzzer & siren
+    const now = 0;
+    // Massive dual-frequency sawtooth buzzer
+    tone(110, 0.8, 'sawtooth', now, 0.4);
+    tone(113, 0.8, 'sawtooth', now + 0.02, 0.4);
+    tone(85, 0.9, 'sawtooth', now + 0.1, 0.45);
+    
+    // Short dramatic warning siren sweep (pitch slide)
+    const c = ac();
+    if (!muted && c) {
+      const t = c.currentTime;
+      const o1 = c.createOscillator();
+      const o2 = c.createOscillator();
+      const g = c.createGain();
+      
+      o1.type = 'sawtooth';
+      o2.type = 'sine';
+      
+      o1.frequency.setValueAtTime(350, t);
+      o1.frequency.exponentialRampToValueAtTime(150, t + 1.0);
+      
+      o2.frequency.setValueAtTime(150, t);
+      o2.frequency.exponentialRampToValueAtTime(350, t + 1.0);
+      
+      o1.connect(g);
+      o2.connect(g);
+      g.connect(c.destination);
+      
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.25, t + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 1.1);
+      
+      o1.start(t);
+      o2.start(t);
+      o1.stop(t + 1.2);
+      o2.stop(t + 1.2);
+    }
+  }
+  function soundComplete(){ [523,659,784,1047,1318].forEach((f,i)=>tone(f,0.35,'triangle',i*0.12, 0.2)); }
+
+  // ---- Show Grafis Pop Up BENAR / SALAH ----
+  function triggerPopGraphic(type, details = '') {
+    const container = $('#visual-feedback');
+    container.innerHTML = '';
+    
+    let html = '';
+    if (type === 'BENAR') {
+      html = `
+        <div class="relative flex items-center justify-center w-full max-w-[700px] px-4">
+          <!-- Multi-layered glowing backgrounds -->
+          <div class="sunburst-glow"></div>
+          <div class="banner-stripe"></div>
+          
+          <!-- Fun, massive floating game elements -->
+          <div class="spin-slow absolute text-yellow-300 text-5xl" style="top:-80px; left:40px;">⭐</div>
+          <div class="spin-slow absolute text-yellow-200 text-4xl" style="bottom:-60px; right:60px; animation-direction: reverse;">⭐</div>
+          <div class="absolute text-5xl animate-bounce" style="top:-90px; right:100px; animation-duration:0.8s;">🍄</div>
+          
+          <!-- Large Mario Party Styled Card -->
+          <div class="mario-victory-enter shine-effect wood-panel rounded-3xl p-8 md:p-12 flex flex-col items-center w-full bg-gradient-to-r from-[#ffd166] via-[#6ba43a] to-[#a7c957] border-white soft-shadow text-center relative z-10" style="border-width: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
+            
+            <!-- Confetti icons -->
+            <div class="flex items-center justify-center gap-4 mb-4">
+              <span class="text-5xl animate-bounce" style="animation-duration: 0.6s;">🌟</span>
+              <div class="bg-yellow-400 p-4 rounded-full shadow-lg border-4 border-white animate-spin" style="animation-duration: 4s;">
+                <i data-lucide="trophy" style="width: 56px; height: 48px; color: #fff;"></i>
+              </div>
+              <span class="text-5xl animate-bounce" style="animation-duration: 0.7s; animation-delay: 0.1s;">🎉</span>
+            </div>
+            
+            <!-- Super Big, super thick Comic Text with stroke -->
+            <h2 class="heading-font text-6xl md:text-7xl font-bold text-white drop-shadow-[0_8px_0_#1e3a0a] tracking-wider select-none animate-pulse" style="-webkit-text-stroke: 3px #1e3a0a; font-family: 'Fredoka', sans-serif;">
+              BENAR!
+            </h2>
+            <p class="heading-font text-3xl md:text-4xl text-yellow-200 mt-4 font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">${details}</p>
+            <div class="text-lg text-white font-bold mt-3 bg-black/30 px-6 py-1 rounded-full border border-white/20">Jawaban Tepat!</div>
+          </div>
+        </div>
+      `;
+      // Spawn rich particles
+      spawnSparkleParticles();
+    } else {
+      html = `
+        <div class="relative flex items-center justify-center w-full max-w-[600px] px-4">
+          <!-- Heavy Shake & Dark/Cracked Board Panel -->
+          <div class="pop-graphic shake wood-panel rounded-3xl p-8 md:p-10 flex flex-col items-center w-full bg-[#3e2713] border-[#6b4423] soft-shadow text-center relative z-10" style="border-width: 8px; background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 10px);">
+            <!-- Warning Icons -->
+            <div class="flex items-center justify-center gap-3 mb-4">
+              <span class="text-4xl animate-pulse">👣</span>
+              <div class="bg-gradient-to-br from-[#c1440e] to-[#e63946] p-3 rounded-full shadow-lg border-4 border-white">
+                <i data-lucide="alert-triangle" style="width: 48px; height: 48px; color: #fff;"></i>
+              </div>
+              <span class="text-4xl animate-pulse">❌</span>
+            </div>
+            
+            <!-- SALAH! big red text with white outline -->
+            <h2 class="heading-font text-5xl md:text-6xl font-bold text-[#e63946] drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] tracking-wide select-none" style="-webkit-text-stroke: 1.5px #fff; font-family: 'Fredoka', sans-serif;">
+              SALAH!
+            </h2>
+            <p class="heading-font text-xl md:text-2xl text-[#f5ecd7] mt-3 font-semibold">Coba lagi, Tim ${activeTeam}!</p>
+          </div>
+        </div>
+      `;
+      // Full screen red flash
+      document.body.classList.add('red-flash');
+      setTimeout(() => document.body.classList.remove('red-flash'), 500);
+      
+      // Spawn dust / broken leaf particles beterbangan
+      spawnDustDebris();
+    }
+    
+    container.innerHTML = html;
+    lucide.createIcons();
+    container.classList.remove('opacity-0', 'scale-95');
+    container.classList.add('opacity-100', 'scale-100');
+    
+    setTimeout(() => {
+      container.classList.add('opacity-0', 'scale-95');
+      container.classList.remove('opacity-100', 'scale-100');
+    }, 2000);
+  }
+
+  // Spawn spark particles for correct answer
+  function spawnSparkleParticles() {
+    const parent = $('#visual-feedback');
+    const colors = ['#ffd166', '#ffffff', '#ff9f1c', '#4cc9f0', '#f72585', '#7209b7'];
+    for(let i=0; i<45; i++) {
+      const p = document.createElement('div');
+      p.className = 'sparkle-particle text-3xl';
+      p.textContent = ['✨', '🌟', '❇️', '⭐', '🎈', '🎉'][Math.floor(Math.random()*6)];
+      p.style.color = colors[Math.floor(Math.random()*colors.length)];
+      
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 100 + Math.random() * 300;
+      const mx = Math.cos(angle) * dist;
+      const my = Math.sin(angle) * dist;
+      
+      p.style.setProperty('--mx', `${mx}px`);
+      p.style.setProperty('--my', `${my}px`);
+      p.style.left = '50%';
+      p.style.top = '50%';
+      parent.appendChild(p);
+      setTimeout(() => p.remove(), 1800);
+    }
+  }
+
+  // Spawn dust particles for wrong answer
+  function spawnDustDebris() {
+    const parent = $('#visual-feedback');
+    const debris = ['🟤', '💨', '🪵', '💥'];
+    for(let i=0; i<30; i++) {
+      const p = document.createElement('div');
+      p.className = 'dust-particle text-3xl';
+      p.textContent = debris[Math.floor(Math.random()*debris.length)];
+      
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 70 + Math.random() * 220;
+      const mx = Math.cos(angle) * dist;
+      const my = Math.sin(angle) * dist;
+      
+      p.style.setProperty('--mx', `${mx}px`);
+      p.style.setProperty('--my', `${my}px`);
+      p.style.left = '50%';
+      p.style.top = '50%';
+      parent.appendChild(p);
+      setTimeout(() => p.remove(), 1400);
+    }
+  }
+
+  // ---- Normalize ----
+  const norm = s => (s||'').toLowerCase().trim().replace(/\s+/g,' ');
+
+  // ---- Render round ----
+  function renderRound(){
+    const r = ROUNDS[roundIndex];
+    $('#round-number').textContent = roundIndex + 1;
+    $('#question-text').textContent = r.q;
+    opened = r.answers.map(()=>false);
+    grid().forEach((flip, i)=>{
+      flip.classList.remove('open');
+      const cardFront = flip.querySelector('.canva-card');
+      cardFront.classList.remove('success-halo');
+      const back = flip.querySelector('.flip-back');
+      back.classList.remove('success-halo');
+      const a = r.answers[i];
+      const txt = back.querySelector('.answer-text');
+      const pts = back.querySelector('.answer-pts');
+      if(a){ txt.textContent = a.t; pts.textContent = a.p; flip.style.display=''; }
+      else { txt.textContent=''; pts.textContent=''; flip.style.display='none'; }
+    });
+    setMessage('');
+  }
+
+  function setMessage(m){ $('#message').textContent = m; }
+
+  // ---- Reveal one answer index ----
+  function openAnswer(i, addScore){
+    if(opened[i]) return;
+    opened[i]=true;
+    
+    const flip = grid()[i];
+    flip.classList.add('open');
+    
+    // Add success halo green glow on front & back cards
+    const cardFront = flip.querySelector('.canva-card');
+    const cardBack = flip.querySelector('.flip-back');
+    cardFront.classList.add('success-halo');
+    cardBack.classList.add('success-halo');
+
+    if(addScore){
+      const pts = ROUNDS[roundIndex].answers[i].p;
+      
+      // Floating points popup over the active team panel
+      const teamSelector = activeTeam === 'A' ? '#teamAPanel' : '#teamBPanel';
+      const teamEl = $(teamSelector);
+      const floatEl = document.createElement('div');
+      floatEl.className = 'floating-pts absolute z-50 heading-font text-4xl font-extrabold text-[#ffd166] drop-shadow-lg';
+      floatEl.textContent = `+${pts}`;
+      floatEl.style.left = '50%';
+      floatEl.style.top = '10%';
+      floatEl.style.transform = 'translateX(-50%)';
+      teamEl.style.position = 'relative';
+      teamEl.appendChild(floatEl);
+      setTimeout(() => floatEl.remove(), 1200);
+
+      if(activeTeam==='A'){ scoreA+=pts; bumpScore('#team-a-score', scoreA); }
+      else { scoreB+=pts; bumpScore('#team-b-score', scoreB); }
+      
+      soundCorrect();
+      triggerPopGraphic('BENAR', `+${pts} Poin!`);
+    }
+    checkComplete();
+  }
+
+  function bumpScore(sel, val){
+    const el = $(sel); el.textContent = val;
+    el.classList.remove('score-pop'); void el.offsetWidth; el.classList.add('score-pop');
+  }
+
+  function checkComplete(){
+    const r = ROUNDS[roundIndex];
+    const total = r.answers.length;
+    const cnt = opened.slice(0,total).filter(Boolean).length;
+    if(cnt === total){ soundComplete(); setTimeout(showOverlay, 1000); stopTimer(); }
+  }
+
+  // ---- Check submitted answer ----
+  function checkAnswer(){
+    const val = norm($('#answer-input').value);
+    if(!val) return;
+    const r = ROUNDS[roundIndex];
+    let found = -1, already = false;
+    r.answers.forEach((a,i)=>{ if(norm(a.t)===val){ if(opened[i]) already=true; else found=i; } });
+    if(found>=0){
+      openAnswer(found, true);
+      setMessage('Jawaban benar! +'+r.answers[found].p+' poin untuk Tim '+activeTeam);
+    } else if(already){
+      setMessage('Jawaban ini sudah terbuka.');
+    } else {
+      wrongFeedback();
+    }
+    $('#answer-input').value='';
+    $('#answer-input').focus();
+  }
+
+  function wrongFeedback(){
+    soundWrong();
+    const board = $('#answer-grid');
+    board.classList.remove('shake'); void board.offsetWidth; board.classList.add('shake');
+    addStrike();
+    triggerPopGraphic('SALAH');
+    setMessage('Yah, salah! Coba lagi ya.');
+  }
+
+  // ---- Controls ----
+  function setActiveTeam(t){
+    activeTeam=t;
+    $('#teamAPanel').classList.toggle('team-active', t==='A');
+    $('#teamBPanel').classList.toggle('team-active', t==='B');
+  }
+
+  function revealAll(){
+    const r = ROUNDS[roundIndex];
+    r.answers.forEach((a,i)=>{ if(!opened[i]){ opened[i]=true; grid()[i].classList.add('open'); } });
+    checkComplete();
+  }
+
+  function addStrike(){
+    if(strikes>=3) return;
+    strikes++; renderStrikes(); soundWrong();
+  }
+  function undoStrike(){
+    if(strikes<=0) return;
+    strikes--; renderStrikes();
+  }
+  function renderStrikes(){
+    for(let i=1;i<=3;i++){ 
+      const s = $('#strike-'+i);
+      s.classList.toggle('lit', i<=strikes); 
+      s.classList.toggle('strike-pulse', i<=strikes);
+    }
+  }
+
+  function nextRound(){
+    roundIndex = (roundIndex+1) % ROUNDS.length;
+    strikes=0; renderStrikes();
+    renderRound(); resetTimer(); closeOverlay();
+  }
+
+  function resetGame(){
+    roundIndex=0; scoreA=0; scoreB=0; strikes=0;
+    $('#team-a-score').textContent='0'; $('#team-b-score').textContent='0';
+    renderStrikes(); renderRound(); resetTimer(); closeOverlay();
+    setActiveTeam('A');
+  }
+
+  // ---- Timer ----
+  function toggleTimer(){
+    timerOn = !timerOn;
+    $('#timer-wrap').classList.toggle('hidden', !timerOn);
+    $('#timer-wrap').classList.toggle('flex', timerOn);
+    if(timerOn){ resetTimer(); startTimer(); } else { stopTimer(); }
+  }
+  function startTimer(){
+    if(!timerOn || timerRunning) return;
+    timerRunning=true;
+    timerId=setInterval(()=>{
+      timerVal--; $('#timer-display').textContent=timerVal;
+      if(timerVal<=0){ stopTimer(); soundWrong(); setMessage('Waktu habis!'); }
+    },1000);
+  }
+  function stopTimer(){ timerRunning=false; if(timerId){ clearInterval(timerId); timerId=null; } }
+  function resetTimer(){ stopTimer(); timerVal=60; $('#timer-display').textContent='60'; if(timerOn) startTimer(); }
+
+  // ---- Theme ----
+  function toggleTheme(){
+    document.body.classList.toggle('dark');
+    const dark = document.body.classList.contains('dark');
+    $('#theme-label-txt').textContent = dark ? 'Terang' : 'Gelap';
+  }
+
+  // ---- Mute ----
+  function toggleMute(){ muted = !muted; }
+
+  /* Fullscreen */
+  function toggleFullscreen(){
+    const el = document.body;
+    try {
+      if(!document.fullscreenElement && !document.webkitFullscreenElement){
+        if(el.requestFullscreen) { el.requestFullscreen(); }
+        else if(el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); }
+      }
+      else {
+        if(document.exitFullscreen) { document.exitFullscreen(); }
+        else if(document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+      }
+    } catch(err) {
+      console.warn("Fullscreen change rejected/unsupported in sandbox iframe: ", err);
+      setMessage("Fitur Fullscreen dibatasi oleh keamanan browser / sandbox iframe.");
+      setTimeout(() => setMessage(""), 3000);
+    }
+  }
+
+  // Handle resizing / scaling adjustments during fullscreen change
+  function handleFullscreenChange() {
+    window.dispatchEvent(new Event('resize'));
+  }
+  document.addEventListener('fullscreenchange', handleFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+  // ---- Overlay + confetti ----
+  function showOverlay(){ $('#overlay').classList.remove('hidden-soft'); }
+  function closeOverlay(){ $('#overlay').classList.add('hidden-soft'); }
+
+  // ---- Init ----
+  document.getElementById('answer-form').addEventListener('submit', e=>{ e.preventDefault(); ac(); checkAnswer(); });
+
+  renderRound();
+  renderStrikes();
+  setActiveTeam('A');
+  lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a17d0916d11a394e',t:'MTc4MzQ5MjE3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>
